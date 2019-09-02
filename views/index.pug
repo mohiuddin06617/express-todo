@@ -1,0 +1,50 @@
+extends layout
+block append headerStylesheet
+  link(rel="stylesheet", href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css")
+  link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/sweetalert2@8.17.1/dist/sweetalert2.min.css")
+
+block content
+  h1.text-center Welcome to #{title}
+  .container 
+    .my-3.p-3.bg-white.rounded.shadow-sm
+      h4.pb-2.mb-0.font-weight-bold.text-center Create a Todo
+      hr.border-danger.w-25
+      form(action="/" method="post")
+        .row
+          .col
+            input.form-control.mb-3.mr-sm-2(type='text' name='taskname' placeholder='Task Name')
+          .col
+            input#taskdate.form-control.mb-3.mr-sm-2(type='text' name='taskdate' placeholder='Date of Completion')
+        button.btn.btn-primary.btn-block.mb-2(type='submit') 
+          i.fas.fa-plus Add New Task
+    h4.pb-2.mb-0.font-weight-bold.text-center Your Todo List
+    hr.border-danger.w-25
+    table#myTable.display
+      thead
+        tr
+          th Name
+          th Date
+          th Status
+          th Action
+      tbody
+        each val in todolist
+          tr(id=val._id)
+            td= val.taskname
+            td= val.taskdate
+            if val.done
+              td= 'Complete'
+            else
+              td= 'Incomplete'
+            td
+              if !val.done
+                button.btn.btn-success.btn-sm.mr-1.mark-complete-btn
+                  i.fas.fa-check
+              button.btn.btn-info.btn-sm.mr-1.edit-btn
+                i.fas.fa-edit
+              button.btn.btn-danger.btn-sm.mr-1.delete-btn(id= val._id)
+                i.fas.fa-trash
+block append footer
+  script(src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js")
+  script(src="https://code.jquery.com/ui/1.12.1/jquery-ui.js")
+  script(src="https://cdn.jsdelivr.net/npm/sweetalert2@8.17.1/dist/sweetalert2.all.js")
+  script(src="/javascripts/script.js")
