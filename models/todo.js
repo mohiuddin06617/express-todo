@@ -3,10 +3,12 @@ const mongoose = require('mongoose');
 
 var todoSchema = mongoose.Schema({
     taskname: {
-        type: String
+        type: String,
+        required:[true,"Please insert name of the task"]
     },
     taskdate:{
-        type:Date
+        type:Date,
+        required:[true,"Please enter date of task"]
     },
     done: {
         type: Boolean

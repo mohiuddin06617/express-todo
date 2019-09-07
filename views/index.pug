@@ -14,7 +14,7 @@ block content
           .col
             input.form-control.mb-3.mr-sm-2(type='text' name='taskname' placeholder='Task Name')
           .col
-            input#taskdate.form-control.mb-3.mr-sm-2(type='text' name='taskdate' placeholder='Date of Completion')
+            input#taskdate.form-control.mb-3.mr-sm-2(type='text' name='taskdate' autocomplete='off' placeholder='Date of Completion')
         button.btn.btn-primary.btn-block.mb-2(type='submit') 
           i.fas.fa-plus Add New Task
     h4.pb-2.mb-0.font-weight-bold.text-center Your Todo List
@@ -37,7 +37,7 @@ block content
               td= 'Incomplete'
             td
               if !val.done
-                button.btn.btn-success.btn-sm.mr-1.mark-complete-btn
+                button.btn.btn-success.btn-sm.mr-1.mark-complete-btn(id= val.id)
                   i.fas.fa-check
               button.btn.btn-info.btn-sm.mr-1.edit-btn
                 i.fas.fa-edit
