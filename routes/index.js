@@ -27,6 +27,14 @@ router.post('/', function (req, res, next) {
   })
 });
 
+//Single GET
+router.get('/:taskId',function(req,res,next){
+  let taskId = req.params.taskId;
+  todo.findOne({_id:taskId},function(err,obj){
+    res.status(200).json(obj);
+  })
+})
+
 // Delete Todo
 router.post('/delete', function (req, res, next) {
   console.log("Deleted");

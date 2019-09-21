@@ -82,4 +82,44 @@ $(document).ready(function () {
             }
         });
     });
+    $(document).on('click', '.edit-btn', function () {
+
+        let currentTrId = this.id;
+        $.ajax({
+            method: "get",
+            url: "/" + currentTrId,
+            // data: { "taskId": this.id },
+            success: function (result) {
+                Swal.fire({
+                    title: 'Edit ' + result.taskname,
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#ffae32',
+                    confirmButtonText: '<i class="fas fa-check"></i> Update',
+                    cancelButtonText: '<i class="fas fa-window-close"></i> Cancel',
+                    html:
+                        '<input id="editTaskName" class="swal2-input" value="' + result.taskname + '">' +
+                        '<input id="editTaskDate" class="swal2-input" value="' + result.taskdate + '">' +
+                        '<div class="form-check form-check-inline">' +
+                            '<input class="form-check-input" type="radio" name="done" id="done" value="1" '+(result.done)+'checked>' +
+                            '<label class="form-check-label" for="done">Mark as Complete</label>' +
+                        '</div>' +
+                        '<div class="form-check form-check-inline">' +
+                            '<input class="form-check-input" type="radio" name="done" id="done" value="0">' +
+                            '<label class="form-check-label" for="done">Mark as Incomplete</label>' +
+                        '</div>',
+                    focusConfirm: false,
+                    onOpen: function() {
+                        $('#editTaskDate').datepicker({});
+                    },
+                    preConfirm: () => {
+                        return [
+                            console.log("Task Name : "+document.getElementById('editTaskName').value+ ", Date : " +
+                            document.getElementById('editTaskDate').value)
+                        ]
+                    },
+                })
+            }
+        })
+    });
 });
